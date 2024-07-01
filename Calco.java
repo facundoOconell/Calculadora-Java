@@ -480,11 +480,12 @@ public class Calco extends JFrame {
                         resultado = Math.pow(resultado, operando);
                         break;
                     case "√":
-                        if (i + 2 < partes.length && partes[i + 1].equals("(") && partes[i + 3].equals(")")) {
-                            resultado = Math.pow(Double.parseDouble(partes[i + 2]), 1 / resultado);
-                            i += 3; 
+                        if (i + 1 < partes.length) {
+                            double radicando = Double.parseDouble(partes[i + 1]);
+                            resultado = Math.pow(radicando, 1 / resultado);
+                            i += 1; // Avanzamos el índice para omitir el radicando ya procesado
                         } else {
-                            resultado = Math.sqrt(resultado);
+                            throw new IllegalArgumentException("Falta el radicando para la raíz");
                         }
                         break;
                     default:
