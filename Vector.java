@@ -13,7 +13,7 @@ public class Vector extends JFrame {
     private JPanel vector2Panel;
     private JTextField scalarField;
     private JLabel resultLabel;
-    private int vectorSize = 3; // Tamaño inicial de los vectores
+    private int vectorSize = 3; // TamaÃ±o inicial de los vectores
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -37,73 +37,77 @@ public class Vector extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Función para agregar campos de texto a los vectores
+        // FunciÃ³n para agregar campos de texto a los vectores
         agregarCamposVector();
 
         // Etiqueta y campo para el escalar
         JLabel lblEscalar = new JLabel("Escalar:");
-        lblEscalar.setBounds(32, 544, 54, 30);
+        lblEscalar.setBounds(52, 581, 54, 30);
         contentPane.add(lblEscalar);
 
         scalarField = new JTextField(10);
-        scalarField.setBounds(96, 544, 100, 30);
+        scalarField.setBounds(106, 581, 100, 30);
         scalarField.setHorizontalAlignment(JTextField.CENTER);
         contentPane.add(scalarField);
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(245, 245, 245));
+        panel.setBackground(SystemColor.controlHighlight);
         panel.setBounds(10, 0, 464, 120);
         contentPane.add(panel);
         panel.setLayout(null);
 
         resultLabel = new JLabel("");
+        resultLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+        resultLabel.setBackground(SystemColor.menu);
         resultLabel.setBounds(10, 11, 444, 100);
         panel.add(resultLabel);
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Botones de operaciones
         JButton btnSuma = new JButton("Suma");
-        btnSuma.setBounds(82, 452, 119, 30);
+        btnSuma.setBounds(79, 461, 140, 30);
         btnSuma.setBackground(new Color(230, 230, 250));
         contentPane.add(btnSuma);
 
         JButton btnResta = new JButton("Resta");
-        btnResta.setBounds(274, 452, 119, 30);
+        btnResta.setBounds(250, 461, 140, 30);
         btnResta.setBackground(new Color(230, 230, 250));
         contentPane.add(btnResta);
 
-        JButton btnMultiEscalar = new JButton("Multiplicación Escalar");
-        btnMultiEscalar.setBounds(217, 544, 131, 30);
+        JButton btnMultiEscalar = new JButton("Multiplicacion Escalar");
+        btnMultiEscalar.setBounds(250, 581, 140, 30);
         btnMultiEscalar.setBackground(new Color(230, 230, 250));
         contentPane.add(btnMultiEscalar);
 
         JButton btnProEscalar = new JButton("Producto Escalar");
-        btnProEscalar.setBounds(82, 493, 140, 30);
+        btnProEscalar.setBounds(79, 521, 140, 30);
         btnProEscalar.setBackground(new Color(230, 230, 250));
         contentPane.add(btnProEscalar);
 
         JButton btnProVectorial = new JButton("Producto Vectorial");
-        btnProVectorial.setBounds(253, 493, 140, 30);
+        btnProVectorial.setBounds(250, 521, 140, 30);
         btnProVectorial.setBackground(new Color(230, 230, 250));
         contentPane.add(btnProVectorial);
 
         JButton btnCambiarTamaño = new JButton("Cambiar Tamaño");
-        btnCambiarTamaño.setBounds(82, 363, 141, 30);
+        btnCambiarTamaño.setBounds(79, 402, 141, 30);
         btnCambiarTamaño.setBackground(new Color(230, 230, 250));
         contentPane.add(btnCambiarTamaño);
 
         JButton btnVaciarVectores = new JButton("Vaciar Vectores");
-        btnVaciarVectores.setBounds(253, 363, 140, 30);
-        btnVaciarVectores.setBackground(new Color(230, 230, 250));
+        btnVaciarVectores.setForeground(new Color(255, 255, 255));
+        btnVaciarVectores.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btnVaciarVectores.setBounds(250, 392, 140, 48);
+        btnVaciarVectores.setBackground(new Color(204, 51, 51));
         contentPane.add(btnVaciarVectores);
 
-        // Botón para volver al panel principal
-        JButton btnVolver = new JButton("Volver al Panel Principal");
-        btnVolver.setBounds(276, 620, 182, 30);
+        // BotÃ³n para volver al panel principal
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(20, 335, 73, 54);
         btnVolver.setBackground(new Color(230, 230, 250));
         contentPane.add(btnVolver);
 
-        // Acción para el botón de cambiar tamaño
+        // AcciÃ³n para el botÃ³n de cambiar tamaÃ±o
         btnCambiarTamaño.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String input = JOptionPane.showInputDialog("Ingrese el nuevo tamaño para los vectores:");
@@ -130,12 +134,12 @@ public class Vector extends JFrame {
                         JOptionPane.showMessageDialog(null, "El tamaño debe ser mayor que cero.");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido.");
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un numero valido.");
                 }
             }
         });
 
-        // Acción para el botón de vaciar vectores
+        // AcciÃ³n para el botÃ³n de vaciar vectores
         btnVaciarVectores.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarPanel(vector1Panel);
@@ -144,7 +148,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // Acción para sumar vectores y guardar el resultado en vector1Field
+        // AcciÃ³n para sumar vectores y guardar el resultado en vector1Field
         btnSuma.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -158,7 +162,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // Acción para restar vectores y guardar el resultado en vector1Field
+        // AcciÃ³n para restar vectores y guardar el resultado en vector1Field
         btnResta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -172,7 +176,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // Acción para multiplicar un vector por un escalar y guardar el resultado en vector1Field
+        // AcciÃ³n para multiplicar un vector por un escalar y guardar el resultado en vector1Field
         btnMultiEscalar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -181,16 +185,16 @@ public class Vector extends JFrame {
                     if (v1 != null) {
                         double[] resultado = multiplicarEscalar(escalar, v1);
                         actualizarPanel(vector1Panel, resultado);
-                        resultLabel.setText("Resultado Multiplicación Escalar: " + Arrays.toString(resultado));
+                        resultLabel.setText("Resultado MultiplicaciÃ³n Escalar: " + Arrays.toString(resultado));
                         limpiarPanel(vector2Panel);
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Por favor, ingresa un número válido para el escalar.");
+                    JOptionPane.showMessageDialog(null, "Por favor, ingrese un numero valido para el escalar.");
                 }
             }
         });
 
-        // Acción para calcular el producto escalar y mostrar el resultado en resultLabel
+        // AcciÃ³n para calcular el producto escalar y mostrar el resultado en resultLabel
         btnProEscalar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -203,7 +207,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // Acción para calcular el producto vectorial y mostrar el resultado en resultLabel
+        // AcciÃ³n para calcular el producto vectorial y mostrar el resultado en resultLabel
         btnProVectorial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -214,13 +218,13 @@ public class Vector extends JFrame {
                         resultLabel.setText("Resultado Producto Vectorial: " + Arrays.toString(prodVectorial));
                         limpiarPanel(vector2Panel);
                     } else {
-                        JOptionPane.showMessageDialog(null, "El producto vectorial está definido solo para vectores tridimensionales.");
+                        JOptionPane.showMessageDialog(null, "El producto vectorial esta definido solo para vectores tridimensionales.");
                     }
                 }
             }
         });
 
-        // Acción para el botón de volver al panel principal
+        // AcciÃ³n para el botÃ³n de volver al panel principal
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual de vectores
@@ -229,7 +233,7 @@ public class Vector extends JFrame {
         });
     }
 
-    // Método para agregar campos de texto a los vectores en el panel
+    // MÃ©todo para agregar campos de texto a los vectores en el panel
     private void agregarCamposVector() {
         vector1Panel = new JPanel();
         vector1Panel.setBorder(BorderFactory.createTitledBorder("Vector 1"));
@@ -240,45 +244,47 @@ public class Vector extends JFrame {
         vector2Panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5)); // Centra los campos horizontalmente
 
         JScrollPane vector1ScrollPane = new JScrollPane(vector1Panel);
-        vector1ScrollPane.setBounds(20, 141, 438, 70); // Ajusta el tamaño vertical para acomodar los campos
+        vector1ScrollPane.setBounds(20, 141, 438, 70); // Ajusta el tamaÃ±o vertical para acomodar los campos
         vector1ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         vector1ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Desactiva el scroll vertical
 
         JScrollPane vector2ScrollPane = new JScrollPane(vector2Panel);
-        vector2ScrollPane.setBounds(20, 252, 438, 70); // Ajusta el tamaño vertical para acomodar los campos
+        vector2ScrollPane.setBounds(20, 252, 438, 70); // Ajusta el tamaÃ±o vertical para acomodar los campos
         vector2ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         vector2ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER); // Desactiva el scroll vertical
 
         contentPane.add(vector1ScrollPane);
         contentPane.add(vector2ScrollPane);
 
-        int maxCampos = 20; // Máximo número de campos antes de activar el scroll horizontal
+        int maxCampos = 20; // MÃ¡ximo nÃºmero de campos antes de activar el scroll horizontal
 
         for (int i = 0; i < vectorSize; i++) {
             JTextField textField1 = new JTextField();
-            textField1.setPreferredSize(new Dimension(50, 30)); // Ajusta el tamaño de los campos de texto
+            textField1.setForeground(Color.BLUE);
+            textField1.setPreferredSize(new Dimension(50, 30)); // Ajusta el tamaÃ±o de los campos de texto
             textField1.setHorizontalAlignment(JTextField.CENTER); // Centra el texto horizontalmente
             vector1Panel.add(textField1);
 
             JTextField textField2 = new JTextField();
-            textField2.setPreferredSize(new Dimension(50, 30)); // Ajusta el tamaño de los campos de texto
+            textField2.setForeground(Color.BLUE);
+            textField2.setPreferredSize(new Dimension(50, 30)); // Ajusta el tamaÃ±o de los campos de texto
             textField2.setHorizontalAlignment(JTextField.CENTER); // Centra el texto horizontalmente
             vector2Panel.add(textField2);
 
-            // Verificar si hay más de 20 campos para activar el scroll horizontal
+            // Verificar si hay mÃ¡s de 20 campos para activar el scroll horizontal
             if (i >= maxCampos) {
                 vector1ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
                 vector2ScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             }
         }
 
-        // Ajustar el tamaño del panel de scroll si hay menos de 20 campos
+        // Ajustar el tamaÃ±o del panel de scroll si hay menos de 20 campos
         int preferredWidth = 50 * Math.min(vectorSize, maxCampos);
         vector1ScrollPane.setPreferredSize(new Dimension(preferredWidth, 70));
         vector2ScrollPane.setPreferredSize(new Dimension(preferredWidth, 70));
     }
 
-    // Método para obtener los valores de un vector desde el panel de campos de texto
+    // MÃ©todo para obtener los valores de un vector desde el panel de campos de texto
     private double[] obtenerVector(JPanel panel) {
         Component[] components = panel.getComponents();
         double[] vector = new double[vectorSize];
@@ -289,12 +295,12 @@ public class Vector extends JFrame {
             }
             return vector;
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese números válidos en todos los campos.");
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese numeros validos en todos los campos.");
             return null;
         }
     }
 
-    // Método para actualizar el panel de campos de texto con un nuevo vector
+    // MÃ©todo para actualizar el panel de campos de texto con un nuevo vector
     private void actualizarPanel(JPanel panel, double[] vector) {
         Component[] components = panel.getComponents();
         for (int i = 0; i < vectorSize; i++) {
@@ -303,7 +309,7 @@ public class Vector extends JFrame {
         }
     }
 
-    // Método para limpiar todos los campos de texto en un panel
+    // MÃ©todo para limpiar todos los campos de texto en un panel
     private void limpiarPanel(JPanel panel) {
         Component[] components = panel.getComponents();
         for (Component component : components) {
@@ -314,7 +320,7 @@ public class Vector extends JFrame {
         }
     }
 
-    // Métodos para operaciones con vectores
+    // MÃ©todos para operaciones con vectores
     private double[] sumarVectores(double[] v1, double[] v2) {
         double[] resultado = new double[vectorSize];
         for (int i = 0; i < vectorSize; i++) {
