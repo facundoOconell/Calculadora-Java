@@ -1,4 +1,5 @@
 package matricesTp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -42,18 +43,18 @@ public class Matriz extends JFrame{
 
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(50, 50, 497, 700);
+        frame.setBounds(400, 20, 497, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JPanel panelSuperior = new JPanel();
-        panelSuperior.setBounds(10, 10, 461, 225);
+        panelSuperior.setBounds(10, 10, 461, 184);
         panelSuperior.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         frame.getContentPane().add(panelSuperior);
         panelSuperior.setLayout(new GridLayout(filas, columnas));
 
         JPanel panelCentral = new JPanel();
-        panelCentral.setBounds(10, 245, 461, 225);
+        panelCentral.setBounds(10, 200, 461, 225);
         panelCentral.setLayout(new GridLayout(1, 2, 10, 0));
         frame.getContentPane().add(panelCentral);
 
@@ -93,43 +94,17 @@ public class Matriz extends JFrame{
         panelInferior.add(operacionesPanel);
 
         comboBox = new JComboBox<>();
+        comboBox.setBackground(new Color(230, 230, 250));
         comboBox.addItem("+");
         comboBox.addItem("-");
         comboBox.addItem("*");
         operacionesPanel.add(comboBox);
-        
-        btnDivision = new JButton("División");
-        btnDivision.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                obtenerMatricesDesdeCampos();
-
-                double[][] matrizInversa = null;
-                if (matriz2 != null) {
-                    if (filas == 3 && columnas == 3) {
-                        matrizInversa = calcularMatrizInversa3x3(matriz2);
-                    } else if (filas == 2 && columnas == 2) {
-                        matrizInversa = calcularMatrizInversa2x2(matriz2);
-                    } else {
-                        JOptionPane.showMessageDialog(frame, "Solo se admite matriz 2x2 o 3x3 para inversa", "Error", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(frame, "La Matriz 2 está vacía", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
-                if (matrizInversa != null) {
-                    double[][] matrizResultadoDivision = multiplicacionMatrices(matriz1, matrizInversa);
-                    mostrarResultadoEnInterfaz(matrizResultadoDivision);
-                }
-            }
-        });
-        operacionesPanel.add(btnDivision);
 
 
 
 
         btnOperar = new JButton("Operar");
+        btnOperar.setBackground(new Color(230, 230, 250));
         btnOperar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 obtenerMatricesDesdeCampos();
@@ -146,7 +121,7 @@ public class Matriz extends JFrame{
                         matrizResultado = multiplicacionMatrices(matriz1, matriz2);
                         break;
                     default:
-                        JOptionPane.showMessageDialog(frame, "Operación no válida", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(frame, "Operacion no valida", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                 }
 
@@ -155,31 +130,14 @@ public class Matriz extends JFrame{
         });
         operacionesPanel.add(btnOperar);
 
-        btnRandom = new JButton("Random");
-        btnRandom.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                llenarMatricesConRandom();
-                reiniciarMatrizResultado();
-            }
-        });
-        operacionesPanel.add(btnRandom);
-
-        btnVaciar = new JButton("Vaciar");
-        btnVaciar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                vaciarMatrices();
-                reiniciarMatrizResultado();
-            }
-        });
-        operacionesPanel.add(btnVaciar);
-
         btnProductoEscalar = new JButton("Producto Escalar");
+        btnProductoEscalar.setBackground(new Color(230, 230, 250));
         btnProductoEscalar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String) JOptionPane.showInputDialog(
                         frame,
                         "Seleccione la matriz para calcular el producto escalar:",
-                        "Selección de Matriz",
+                        "Seleccion de Matriz",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
                         new String[]{"Matriz 1", "Matriz 2"},
@@ -197,13 +155,14 @@ public class Matriz extends JFrame{
         });
         operacionesPanel.add(btnProductoEscalar);
 
-        btnMatrizInversa = new JButton("Matriz Inversa");
+        btnMatrizInversa = new JButton("Inversa");
+        btnMatrizInversa.setBackground(new Color(230, 230, 250));
         btnMatrizInversa.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String) JOptionPane.showInputDialog(
                         frame,
                         "Seleccione la matriz para calcular la inversa:",
-                        "Selección de Matriz",
+                        "Seleccion de Matriz",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
                         new String[]{"Matriz 1", "Matriz 2"},
@@ -230,13 +189,14 @@ public class Matriz extends JFrame{
         operacionesPanel.add(btnMatrizInversa);
         
         btnDeterminante2x2 = new JButton("Det 2x2");
+        btnDeterminante2x2.setBackground(new Color(230, 230, 250));
         btnDeterminante2x2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 String opcion = (String) JOptionPane.showInputDialog(
                         frame,
                         "Seleccione la matriz para calcular la determinante 2x2:",
-                        "Selección de Matriz",
+                        "Seleccion de Matriz",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
                         new String[]{"Matriz 1", "Matriz 2"},
@@ -260,12 +220,13 @@ public class Matriz extends JFrame{
         operacionesPanel.add(btnDeterminante2x2);
 
         btnDeterminante = new JButton("Det 3x3");
+        btnDeterminante.setBackground(new Color(230, 230, 250));
         btnDeterminante.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String) JOptionPane.showInputDialog(
                         frame,
                         "Seleccione la matriz para calcular la determinante:",
-                        "Selección de Matriz",
+                        "Seleccion de Matriz",
                         JOptionPane.PLAIN_MESSAGE,
                         null,
                         new String[]{"Matriz 1", "Matriz 2"},
@@ -287,12 +248,52 @@ public class Matriz extends JFrame{
             }
         });
         operacionesPanel.add(btnDeterminante);
+        
+        btnDivision = new JButton("Division");
+        btnDivision.setBackground(new Color(230, 230, 250));
+        btnDivision.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                obtenerMatricesDesdeCampos();
+
+                double[][] matrizInversa = null;
+                if (matriz2 != null) {
+                    if (filas == 3 && columnas == 3) {
+                        matrizInversa = calcularMatrizInversa3x3(matriz2);
+                    } else if (filas == 2 && columnas == 2) {
+                        matrizInversa = calcularMatrizInversa2x2(matriz2);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Solo se admite matriz 2x2 o 3x3 para inversa", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frame, "La Matriz 2 esta vacia", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (matrizInversa != null) {
+                    double[][] matrizResultadoDivision = multiplicacionMatrices(matriz1, matrizInversa);
+                    mostrarResultadoEnInterfaz(matrizResultadoDivision);
+                }
+            }
+        });
+        
+                btnRandom = new JButton("Random");
+                btnRandom.setBackground(new Color(230, 230, 250));
+                btnRandom.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        llenarMatricesConRandom();
+                        reiniciarMatrizResultado();
+                    }
+                });
+                operacionesPanel.add(btnRandom);
+        operacionesPanel.add(btnDivision);
 
         JPanel botonPanel = new JPanel();
         botonPanel.setLayout(new GridLayout(1, 3, 5, 5));
         panelInferior.add(botonPanel);
 
         JButton btn3x3 = new JButton("3x3");
+        btn3x3.setBackground(new Color(230, 230, 250));
         btn3x3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cambiarTamanioMatrices(3, 3);
@@ -301,20 +302,36 @@ public class Matriz extends JFrame{
         botonPanel.add(btn3x3);
 
         JButton btn2x2 = new JButton("2x2");
+        btn2x2.setBackground(new Color(230, 230, 250));
         btn2x2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cambiarTamanioMatrices(2, 2);
             }
         });
         botonPanel.add(btn2x2);
-
-        JButton btnSalir = new JButton("Salir");
-        btnSalir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        botonPanel.add(btnSalir);
+        
+                btnVaciar = new JButton("Vaciar");
+                botonPanel.add(btnVaciar);
+                btnVaciar.setForeground(new Color(255, 255, 255));
+                btnVaciar.setFont(new Font("Tahoma", Font.BOLD, 15));
+                btnVaciar.setBackground(new Color(178, 34, 34));
+                
+                        JButton btnSalir = new JButton("Volver");
+                        btnSalir.setBounds(10, 436, 88, 37);
+                        frame.getContentPane().add(btnSalir);
+                        btnSalir.setBackground(new Color(230, 230, 250));
+                        btnSalir.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                dispose();  // Cerrar la ventana actual
+                                abrirPanelPrincipal();  // Abrir el panel principal u otra acción
+                            }
+                        });
+                btnVaciar.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        vaciarMatrices();
+                        reiniciarMatrizResultado();
+                    }
+                });
 
         reiniciarMatrizResultado();
     }
@@ -470,7 +487,7 @@ public class Matriz extends JFrame{
         try {
             escalar = Double.parseDouble(escalarTexto);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(frame, "Valor de escalar no válido", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Valor de escalar no valido", "Error", JOptionPane.ERROR_MESSAGE);
             return matriz;
         }
 
@@ -567,6 +584,11 @@ public class Matriz extends JFrame{
                 }
             }
         });
+    }
+    
+    private void abrirPanelPrincipal() {
+        PanelPrincipal miBasica = new PanelPrincipal();
+        miBasica.setVisible(true);
     }
 
 	
