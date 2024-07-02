@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
+import java.text.DecimalFormat;
+
 
 public class SistEcuaciones extends JFrame {
 
@@ -91,7 +93,7 @@ public class SistEcuaciones extends JFrame {
         lblNewLabel_3 = new JLabel("");
         lblNewLabel_3.setAutoscrolls(true);
         lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_3.setForeground(new Color(255, 255, 255));
+        lblNewLabel_3.setForeground(new Color(0, 0, 0));
         lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 20));
         panel_2.add(lblNewLabel_3);
 
@@ -100,30 +102,6 @@ public class SistEcuaciones extends JFrame {
         panel_1.setBounds(10, 120, 464, 541);
         contentPane.add(panel_1);
         panel_1.setLayout(null);
-        
-        JButton btnIzquierda = new JButton("<");
-        btnIzquierda.setFocusable(false);
-        btnIzquierda.setBackground(new Color(230, 230, 250));
-        btnIzquierda.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-  
-            }
-        });
-        btnIzquierda.setBounds(128, 18, 80, 37);
-        btnIzquierda.setFont(new Font("Arial", Font.BOLD, 24));
-        panel_1.add(btnIzquierda);
-
-        JButton btnDerecha = new JButton(">"); 
-        btnDerecha.setFocusable(false);
-        btnDerecha.setBackground(new Color(230, 230, 250));
-        btnDerecha.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        btnDerecha.setBounds(235, 18, 80, 37);
-        btnDerecha.setFont(new Font("Arial", Font.BOLD, 24));
-        panel_1.add(btnDerecha);
 
         textField = new JTextField();
         textField.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -209,8 +187,9 @@ public class SistEcuaciones extends JFrame {
         panel_1.add(lblNewLabel_5);
 
         btnNewButton_1 = new JButton("Calcular");
+        btnNewButton_1.setForeground(new Color(0, 0, 255));
         btnNewButton_1.setFocusable(false);
-        btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
         btnNewButton_1.setBackground(new Color(230, 230, 250));
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -367,15 +346,16 @@ public class SistEcuaciones extends JFrame {
         panel_1.add(lblNewLabel_10);
         
         JButton btnNewButton_4 = new JButton("Limpiar");
+        btnNewButton_4.setFocusable(false);
         btnNewButton_4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 limpiarCampos();
             }
         });
-        btnNewButton_4.setBackground(new Color(230, 230, 250));
-        btnNewButton_4.setForeground(new Color(0, 0, 0));
-        btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnNewButton_4.setBounds(355, 13, 80, 50);
+        btnNewButton_4.setBackground(new Color(204, 0, 0));
+        btnNewButton_4.setForeground(Color.WHITE);
+        btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnNewButton_4.setBounds(335, 13, 99, 50);
         panel_1.add(btnNewButton_4);
 
         
@@ -419,9 +399,13 @@ public class SistEcuaciones extends JFrame {
         } else {
             double x = (c * e - b * f) / determinante;
             double y = (a * f - c * d) / determinante;
-            lblNewLabel_3.setText("X = " + x + "   Y = " + y);
+            
+            // Formatear los resultados a dos decimales
+            DecimalFormat df = new DecimalFormat("#.##");
+            lblNewLabel_3.setText("X = " + df.format(x) + "   Y = " + df.format(y));
         }
     }
+
     
     private void calcularSuma3x3(java.awt.event.ActionEvent evt) {
         try {
@@ -455,13 +439,13 @@ public class SistEcuaciones extends JFrame {
                 double y = (a * (R2 * i - R3 * f) - R1 * (d * i - g * f) + c * (d * R3 - g * R2)) / determinante;
                 double z = (a * (e * R3 - h * R2) - b * (d * R3 - g * R2) + R1 * (d * h - g * e)) / determinante;
 
-                // Mostrar resultado en la etiqueta
-                lblNewLabel_3.setText("X = " + x + ", Y = " + y + ", Z = " + z);
+                // Formatear los resultados a dos decimales
+                DecimalFormat df = new DecimalFormat("#.##");
+                lblNewLabel_3.setText("X = " + df.format(x) + ", Y = " + df.format(y) + ", Z = " + df.format(z));
             }
         } catch (NumberFormatException e) {
-            // Manejo de la excepción: Mostrar un mensaje de error o tomar alguna acción adecuada.
             lblNewLabel_3.setText("Error: Ingrese valores numéricos válidos");
-            e.printStackTrace(); // Opcional: Imprimir la traza de la excepción para depurar.
+            e.printStackTrace();
         }
     }
  
