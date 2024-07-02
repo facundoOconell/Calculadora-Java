@@ -10,6 +10,7 @@ public class Calco extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JLabel lblNewLabel;
+    private JLabel lblCursor;
     private StringBuilder expresion = new StringBuilder();
     private int desplazamiento = 0;
     private boolean esperandoRadicando = false; // Nuevo estado para manejar si estamos esperando el radicando
@@ -60,6 +61,10 @@ public class Calco extends JFrame {
         lblNewLabel.setForeground(Color.BLACK);
         lblNewLabel.setBackground(Color.BLACK);
         lblNewLabel.setFont(new Font("Arial", Font.BOLD, 40));
+        lblCursor = new JLabel("|"); // Inicialmente visible como un simple cursor
+        lblCursor.setFont(new Font("Arial", Font.BOLD, 40));
+        lblCursor.setForeground(Color.RED); // Color del cursor
+        panel_2.add(lblCursor);
 
         JPanel panel_1 = new JPanel();
         panel_1.setBackground(SystemColor.control);
@@ -205,7 +210,7 @@ public class Calco extends JFrame {
                 actualizarVisor();
             }
         });
-        btnResta.setBounds(380, 263, 80, 171);
+        btnResta.setBounds(380, 263, 80, 80);
         btnResta.setFont(new Font("Arial", Font.BOLD, 24));
         panel_1.add(btnResta);
 
@@ -303,7 +308,7 @@ public class Calco extends JFrame {
         btnDel.setForeground(new Color(245, 245, 245));
         btnDel.setFocusable(false);
         btnDel.setBackground(new Color(178, 34, 34));
-        btnDel.setToolTipText("Borrar última acción");
+        btnDel.setToolTipText("Borrar Ãºltima acciÃ³n");
         btnDel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (desplazamiento > 0) {
@@ -393,14 +398,14 @@ public class Calco extends JFrame {
         btnPotencia.setFont(new Font("Arial", Font.BOLD, 24));
         panel_1.add(btnPotencia);
 
-        JButton btnRaiz = new JButton("√");
+        JButton btnRaiz = new JButton("√ ");
         btnRaiz.setForeground(new Color(65, 105, 225));
         btnRaiz.setFocusable(false);
         btnRaiz.setBackground(new Color(230, 230, 250));
         btnRaiz.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                expresion.insert(desplazamiento++, "√");
-                esperandoRadicando = true; // Indicamos que el siguiente número será el radicando
+                expresion.insert(desplazamiento++, "√ ");
+                esperandoRadicando = true; 
                 actualizarVisor();
             }
         });
@@ -430,6 +435,42 @@ public class Calco extends JFrame {
         panel_1.add(btnNewButton_2);
         btnNewButton_2.setBackground(new Color(230, 230, 250));
         btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        
+        JButton btnPunto = new JButton(".");
+
+        btnPunto.setForeground(new Color(65, 105, 225));
+
+        btnPunto.setFont(new Font("Arial", Font.BOLD, 24));
+
+        btnPunto.setFocusable(false);
+
+        btnPunto.setBackground(new Color(230, 230, 250));
+
+        btnPunto.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                if (esperandoRadicando) {
+
+                    expresion.insert(desplazamiento++, ".");
+
+                    esperandoRadicando = false;
+
+                } else {
+
+                    expresion.insert(desplazamiento++, ".");
+
+                }
+
+                actualizarVisor();
+
+            }
+
+        });
+
+        btnPunto.setBounds(380, 354, 80, 80);
+
+        panel_1.add(btnPunto);
         btnNewButton_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -439,13 +480,30 @@ public class Calco extends JFrame {
     }
 
     private void actualizarVisor() {
-        int maxCaracteres = 15;
+        int maxCaracteres = 100;
         String texto = expresion.toString();
+
+        // Ajustar el texto si supera el máximo de caracteres visibles
         if (texto.length() > maxCaracteres) {
             texto = texto.substring(desplazamiento, desplazamiento + maxCaracteres);
         }
+
         lblNewLabel.setText(texto);
+
+        // Posicionar el cursor visualmente en la posición actual
+        if (desplazamiento <= texto.length()) {
+            Rectangle bounds = lblNewLabel.getBounds();
+            FontMetrics metrics = lblNewLabel.getFontMetrics(lblNewLabel.getFont());
+            int x = metrics.stringWidth(texto.substring(0, desplazamiento));
+            int y = bounds.height / 2 + metrics.getAscent() / 2;
+            lblCursor.setBounds(x, y, 10, 40); // Ajusta el tamaño del cursor según la fuente
+        } else {
+            // Si el desplazamiento está fuera del rango del texto visible, actualiza el visor
+            lblNewLabel.setText(""); // Limpia el visor
+            lblCursor.setBounds(0, 0, 0, 0); // Oculta el cursor fuera del límite visible
+        }
     }
+
 
     private void abrirPanelPrincipal() {
         PanelPrincipal miBasica = new PanelPrincipal();
@@ -453,6 +511,7 @@ public class Calco extends JFrame {
     }
 
     private double evaluarExpresion(String expresion) {
+    	expresion = expresion.replace(',', '.');
         String[] partes = expresion.split("(?<=[-+*/^√])|(?=[-+*/^√])");
         double resultado = 0;
 
@@ -483,6 +542,7 @@ public class Calco extends JFrame {
                         if (i + 1 < partes.length) {
                             double radicando = Double.parseDouble(partes[i + 1]);
                             resultado = Math.pow(radicando, 1 / resultado);
+                            resultado = round(resultado, 2); // Redondea a dos decimales
                             i += 1; // Avanzamos el índice para omitir el radicando ya procesado
                         } else {
                             throw new IllegalArgumentException("Falta el radicando para la raíz");
@@ -498,4 +558,13 @@ public class Calco extends JFrame {
 
         return resultado;
     }
+
+	private double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
+	}
 }
