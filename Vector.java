@@ -256,7 +256,7 @@ public class Vector extends JFrame {
         contentPane.add(vector1ScrollPane);
         contentPane.add(vector2ScrollPane);
 
-        int maxCampos = 20; // MÃ¡ximo nÃºmero de campos antes de activar el scroll horizontal
+        int maxCampos = 7; // MÃ¡ximo nÃºmero de campos antes de activar el scroll horizontal
 
         for (int i = 0; i < vectorSize; i++) {
             JTextField textField1 = new JTextField();
