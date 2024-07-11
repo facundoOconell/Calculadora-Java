@@ -37,7 +37,7 @@ public class Vector extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // FunciÃ³n para agregar campos de texto a los vectores
+        
         agregarCamposVector();
 
         // Etiqueta y campo para el escalar
@@ -107,7 +107,7 @@ public class Vector extends JFrame {
         btnVolver.setBackground(new Color(230, 230, 250));
         contentPane.add(btnVolver);
 
-        // AcciÃ³n para el botÃ³n de cambiar tamaÃ±o
+        
         btnCambiarTamaño.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String input = JOptionPane.showInputDialog("Ingrese el nuevo tamaño para los vectores:");
@@ -162,7 +162,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // AcciÃ³n para restar vectores y guardar el resultado en vector1Field
+       
         btnResta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -176,7 +176,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // AcciÃ³n para multiplicar un vector por un escalar y guardar el resultado en vector1Field
+      
         btnMultiEscalar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -194,7 +194,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // AcciÃ³n para calcular el producto escalar y mostrar el resultado en resultLabel
+      
         btnProEscalar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -207,7 +207,7 @@ public class Vector extends JFrame {
             }
         });
 
-        // AcciÃ³n para calcular el producto vectorial y mostrar el resultado en resultLabel
+       
         btnProVectorial.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 double[] v1 = obtenerVector(vector1Panel);
@@ -224,7 +224,6 @@ public class Vector extends JFrame {
             }
         });
 
-        // AcciÃ³n para el botÃ³n de volver al panel principal
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Cierra la ventana actual de vectores
@@ -233,7 +232,7 @@ public class Vector extends JFrame {
         });
     }
 
-    // MÃ©todo para agregar campos de texto a los vectores en el panel
+
     private void agregarCamposVector() {
         vector1Panel = new JPanel();
         vector1Panel.setBorder(BorderFactory.createTitledBorder("Vector 1"));
@@ -300,7 +299,7 @@ public class Vector extends JFrame {
         }
     }
 
-    // MÃ©todo para actualizar el panel de campos de texto con un nuevo vector
+    
     private void actualizarPanel(JPanel panel, double[] vector) {
         Component[] components = panel.getComponents();
         for (int i = 0; i < vectorSize; i++) {
@@ -309,7 +308,7 @@ public class Vector extends JFrame {
         }
     }
 
-    // MÃ©todo para limpiar todos los campos de texto en un panel
+    
     private void limpiarPanel(JPanel panel) {
         Component[] components = panel.getComponents();
         for (Component component : components) {
